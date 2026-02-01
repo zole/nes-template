@@ -7,9 +7,8 @@ Starting a new project
 -----
 
 
-0. Install a recent release of cc65 (e.g., `brew install cc65 --HEAD`)
-1. Clone the repository
-2. Initialize submodules to get the FamiStudio engine dependency, if desired
+1. Install a recent release of cc65 (e.g., `brew install cc65 --HEAD`)
+2. Clone the repository with `--recurse-submodules --shallow-submodules` (to get the FamiStudio engine dependency, if desired)
 3. Edit `config.inc` to taste.
     * NES_MIRRORING defines the nametable layout and may need editing
     * Mappers other than NROM (0) need additional configuration
