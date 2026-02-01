@@ -1,0 +1,13 @@
+*.map
+*.dbg
+*.lst
+
+*.d
+*.o
+*.nes
+
+build
+unused
+
+# macOS
+.DS_Store
