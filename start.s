@@ -15,10 +15,9 @@
         .import CFG_PREINIT_FN
     .endif
 
-    ;; defined by the linker. a nonzero SRAM_SIZE implies C support
-    .import __SRAM_START__, __SRAM_SIZE__, __STACKSIZE__
-    .export __STARTUP__ : absolute = 1      ; Mark as startup
 
+    .import __CSTACK_START__, __CSTACK_SIZE__
+    .export __STARTUP__ : absolute = 1      ; Mark as startup
     .import copydata
     ; importzp
 
@@ -103,13 +102,13 @@ clear_memory:
     inx
     bne clear_memory        ; will fall through when x == 0
 
-.if .defined(__SRAM_SIZE__) .and __SRAM_SIZE__ > 0
+.ifdef USE_C
     ;; Copy DATA segment to BSS
     jsr copydata
 
     ;; Set up the C stack
-    lda     #<(__SRAM_START__ + __SRAM_SIZE__)
-    ldx     #>(__SRAM_START__ + __SRAM_SIZE__)
+    lda     #<(__CSTACK_START__ + __CSTACK_SIZE__)
+    ldx     #>(__CSTACK_START__ + __CSTACK_SIZE__)
     sta     c_sp
     stx     c_sp+1
 .endif
